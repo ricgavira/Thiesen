@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thiesen.Domain", "Thiesen.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thiesen.Application", "Thiesen.Application\Thiesen.Application.csproj", "{2A21789C-FEB5-4731-A8B9-0982206785C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thiesen.Infra.Data", "Thiesen.Infra.Data\Thiesen.Infra.Data.csproj", "{18D5BBA0-9243-4E13-AE4F-CFF0D805F195}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thiesen.Infra.IoC", "Thiesen.Infra.IoC\Thiesen.Infra.IoC.csproj", "{4D188A9F-D8E1-492D-A90E-4C836C337F1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2A21789C-FEB5-4731-A8B9-0982206785C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A21789C-FEB5-4731-A8B9-0982206785C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A21789C-FEB5-4731-A8B9-0982206785C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18D5BBA0-9243-4E13-AE4F-CFF0D805F195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18D5BBA0-9243-4E13-AE4F-CFF0D805F195}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18D5BBA0-9243-4E13-AE4F-CFF0D805F195}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18D5BBA0-9243-4E13-AE4F-CFF0D805F195}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D188A9F-D8E1-492D-A90E-4C836C337F1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D188A9F-D8E1-492D-A90E-4C836C337F1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D188A9F-D8E1-492D-A90E-4C836C337F1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D188A9F-D8E1-492D-A90E-4C836C337F1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
