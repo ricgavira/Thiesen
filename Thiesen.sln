@@ -5,13 +5,15 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thiesen.API", "Thiesen.API\Thiesen.API.csproj", "{6C79FCAE-E426-415D-93F0-07812C9DCA12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thiesen.Domain", "Thiesen.Domain\Thiesen.Domain.csproj", "{A966BECC-4C64-4A05-A24E-165BA034825D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thiesen.Domain", "Thiesen.Domain\Thiesen.Domain.csproj", "{A966BECC-4C64-4A05-A24E-165BA034825D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thiesen.Application", "Thiesen.Application\Thiesen.Application.csproj", "{2A21789C-FEB5-4731-A8B9-0982206785C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thiesen.Application", "Thiesen.Application\Thiesen.Application.csproj", "{2A21789C-FEB5-4731-A8B9-0982206785C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thiesen.Infra.Data", "Thiesen.Infra.Data\Thiesen.Infra.Data.csproj", "{18D5BBA0-9243-4E13-AE4F-CFF0D805F195}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thiesen.Infra.Data", "Thiesen.Infra.Data\Thiesen.Infra.Data.csproj", "{18D5BBA0-9243-4E13-AE4F-CFF0D805F195}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thiesen.Infra.IoC", "Thiesen.Infra.IoC\Thiesen.Infra.IoC.csproj", "{4D188A9F-D8E1-492D-A90E-4C836C337F1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thiesen.Infra.IoC", "Thiesen.Infra.IoC\Thiesen.Infra.IoC.csproj", "{4D188A9F-D8E1-492D-A90E-4C836C337F1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thiesen.Test", "Thiesen.Test\Thiesen.Test.csproj", "{8FBBAB04-75E7-4237-A584-444743A8AEA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4D188A9F-D8E1-492D-A90E-4C836C337F1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D188A9F-D8E1-492D-A90E-4C836C337F1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D188A9F-D8E1-492D-A90E-4C836C337F1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FBBAB04-75E7-4237-A584-444743A8AEA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FBBAB04-75E7-4237-A584-444743A8AEA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FBBAB04-75E7-4237-A584-444743A8AEA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FBBAB04-75E7-4237-A584-444743A8AEA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
