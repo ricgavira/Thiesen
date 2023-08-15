@@ -4,7 +4,7 @@ namespace Thiesen.Domain.Entities
 {
     public class PessoaFisica : BaseEntity<PessoaFisica>
     {
-        public PessoaFisica(string nome, string cpf, string rg, string nomeDaMae, string nomeDoPai, DateTime dataNascimento, byte[] foto, Raca raca, string naturalidade, string nacionalidade, Sexo sexo)
+        public PessoaFisica(string nome, string cpf, string rg, string nomeDaMae, string nomeDoPai, DateTime dataNascimento, byte[]? foto, Raca raca, string naturalidade, string nacionalidade, Sexo sexo)
         {
             Nome = nome;
             CPF = cpf;

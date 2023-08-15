@@ -2,16 +2,16 @@
 
 namespace Thiesen.Domain.Helpers
 {
-    public static class Cleaner
+    public static class StringHelper
     {
-        static string CleanText(string input)
+        public static string RemoveSpecialCharacters(string input)
         {
             string cleaned = Regex.Replace(input, @"[^\w\s]", "");
             cleaned = Regex.Replace(cleaned, @"\s+", " ").Trim();
             return cleaned;
         }
 
-        static string OnlyNumber(string input)
+        public static string OnlyNumber(string input)
         {
             string numberOnly = Regex.Replace(input, @"[^\d]", "");
             return numberOnly;

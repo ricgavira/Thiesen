@@ -10,6 +10,6 @@ namespace Thiesen.Infra.IoC.AutoMapper
             services.AddAutoMapper(typeof(MappingProfiles));
 
             return services;
-        };
+        }
     }
 }

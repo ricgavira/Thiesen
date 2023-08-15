@@ -24,7 +24,7 @@ namespace Thiesen.Infra.Data.Repositories
         public async Task DeleteAsync(PessoaFisica pessoaFisica)
         {
             _appDbContext.Remove<PessoaFisica>(pessoaFisica);
-            await _appDbContext.SaveChangesAsync();            
+            await _appDbContext.SaveChangesAsync();
         }
 
         public async Task<ICollection<PessoaFisica>> GetAllAsync()
@@ -58,3 +58,4 @@ namespace Thiesen.Infra.Data.Repositories
             await _appDbContext.SaveChangesAsync();
         }
     }
+}
