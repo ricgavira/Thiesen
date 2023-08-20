@@ -36,9 +36,9 @@ namespace Thiesen.Infra.Data.Mapping
                 .WithOne()
                 .HasForeignKey(x => x.PessoaFisicaId);
                 
-            builder.HasMany(x => x.PessoaFisicaEnderecos)
+            builder.HasMany(x => x.Enderecos)
                 .WithOne(p => p.PessoaFisica)
-                .HasForeignKey(p => p.PessoaFisicaId);
+                .HasForeignKey(p => p.PessoaFisica);
 
             builder.ToTable(nameof(PessoaFisica));
         }

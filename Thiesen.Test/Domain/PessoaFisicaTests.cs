@@ -18,12 +18,10 @@ namespace Thiesen.Test.Domain
         public void DevePessoaFisica()
         {
             var dataNascimento = new DateTime(1970, 5, 20);
-            var endereco = new Endereco("Rua da Divisão", TipoEndereco.Residencial, "79100000", new Bairro("Bairro", new Cidade("Cidade", new Estado("Estado", "MS"))));
+            var endereco = new Endereco("Rua da Divisão", TipoEndereco.Residencial, "79100000", new Bairro("Bairro", new Cidade("Cidade", new Estado("Estado", "MS"))), "100");
             var pessoaFisica = new PessoaFisica(nome, cpf, rg, nomeMae, nomePai, dataNascimento, null, Raca.Pardo, naturalidade, nacionalidade, Sexo.Masculino);
 
-            var pessoaFisicaEndereco = new PessoaFisicaEndereco(endereco, "10", "Esquina", pessoaFisica);
-
-            pessoaFisica.PessoaFisicaEnderecos.Add(pessoaFisicaEndereco);
+            pessoaFisica.Enderecos.Add(endereco);
 
             var contato = new Contato("Telefone Celular", TipoContato.Celular, "Ricardo");
             pessoaFisica.Contatos.Add(contato);

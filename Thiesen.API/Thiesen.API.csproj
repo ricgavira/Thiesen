@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Thiesen.Application\Thiesen.Application.csproj" />
     <ProjectReference Include="..\Thiesen.Infra.Data\Thiesen.Infra.Data.csproj" />
   </ItemGroup>
 

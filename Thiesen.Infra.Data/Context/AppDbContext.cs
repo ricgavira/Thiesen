@@ -17,7 +17,6 @@ namespace Thiesen.Infra.Data.Context
         public DbSet<Estado> Estados { get; set; }
         public DbSet<Perfil> Perfis { get; set; }
         public DbSet<PessoaFisica> PessoasFisicas { get; set; }
-        public DbSet<PessoaFisicaEndereco> PessoaFisicaEnderecos { get; set; }
         public DbSet<PessoaJuridica> PessoasJuridicas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 

@@ -32,6 +32,6 @@ namespace Thiesen.Application.Dtos
         public DateTime DataNascimento { get; set; }
         public byte[]? Foto { get; set; }
         public List<ContatoDto>? ContatosDto { get; set; }
-        public List<PessoaFisicaEnderecoDto>? PessoaFisicaEnderecosDto { get; set; }
+        public List<EnderecoDto>? EnderecosDto { get; set; }
     }
 }

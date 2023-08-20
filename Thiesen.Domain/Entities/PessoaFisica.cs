@@ -4,6 +4,7 @@ namespace Thiesen.Domain.Entities
 {
     public class PessoaFisica : BaseEntity<PessoaFisica>
     {
+        public PessoaFisica() { }
         public PessoaFisica(string nome, string cpf, string rg, string nomeDaMae, string nomeDoPai, DateTime dataNascimento, byte[]? foto, Raca raca, string naturalidade, string nacionalidade, Sexo sexo)
         {
             Nome = nome;
@@ -17,24 +18,22 @@ namespace Thiesen.Domain.Entities
             Naturalidade = naturalidade;
             Nacionalidade = nacionalidade;
             Sexo = sexo;
-            Contatos = new List<Contato>();
-            PessoaFisicaEnderecos = new List<PessoaFisicaEndereco>();
         }
 
-        public string Nome { get; private set; }
-        public string CPF { get; private set; }
-        public string RG { get; private set; }
-        public string NomeDaMae { get; private set; }
-        public string NomeDoPai { get; private set; }
-        public Raca Raca { get; private set; }
-        public Sexo Sexo { get; private set; }
-        public string Naturalidade { get; private set; }
-        public string Nacionalidade { get; private set; }
-        public DateTime DataNascimento { get; private set; }
+        public string Nome { get; set; }
+        public string CPF { get; set; }
+        public string RG { get; set; }
+        public string NomeDaMae { get; set; }
+        public string NomeDoPai { get; set; }
+        public Raca Raca { get; set; }
+        public Sexo Sexo { get; set; }
+        public string Naturalidade { get; set; }
+        public string Nacionalidade { get; set; }
+        public DateTime DataNascimento { get; set; }
         public int Idade => CalcularIdade(DataNascimento);
-        public byte[]? Foto { get; private set; }
-        public List<Contato> Contatos { get; private set; }
-        public List<PessoaFisicaEndereco> PessoaFisicaEnderecos { get; private set; }
+        public byte[]? Foto { get; set; }
+        public List<Contato> Contatos { get; set; } = new List<Contato>();
+        public List<Endereco> Enderecos { get; set; } = new List<Endereco>();
 
         private int CalcularIdade(DateTime dataNascimento)
         {
@@ -47,6 +46,20 @@ namespace Thiesen.Domain.Entities
             }
 
             return idade;
+        }
+
+        public void AdicionarContato(Contato contato)
+        {
+            if (contato == null) return;
+
+            Contatos.Add(contato);
+        }
+
+        public void AdicionarEndereco(Endereco endereco)
+        {
+            if (endereco == null) return;
+
+            Enderecos.Add(endereco);
         }
     }
 }

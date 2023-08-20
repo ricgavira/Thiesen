@@ -9,7 +9,6 @@ namespace Thiesen.Application.Mapping
         public MappingProfiles()
         {
             CreateMap<PessoaFisica, PessoaFisicaDto>();
-            CreateMap<PessoaFisicaEndereco, PessoaFisicaEnderecoDto>();
             CreateMap<Contato, ContatoDto>();
             CreateMap<Endereco, EnderecoDto>();
         }
