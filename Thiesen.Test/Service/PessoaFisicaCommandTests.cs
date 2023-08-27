@@ -1,17 +1,10 @@
-﻿using AutoMapper;
-using FluentValidation;
-using FluentValidation.Results;
-using NSubstitute;
-using Thiesen.Application.Dtos;
-using Thiesen.Application.Dtos.Builders;
-using Thiesen.Application.Services;
+﻿using Thiesen.Application.Dtos.Builders;
 using Thiesen.Domain.Entities;
 using Thiesen.Domain.Enums;
-using Thiesen.Domain.Repositories;
 
 namespace Thiesen.Test.Service
 {
-    public class PessoaFisicaServiceTests
+    public class PessoaFisicaCommandTests
     {
         private readonly string nome = "Ricardo";
         private readonly string cpf = "11111111111";
@@ -23,7 +16,7 @@ namespace Thiesen.Test.Service
         private PessoaFisica pessoaFisica;
         private PessoaFisicaDtoBuilder pessoaFisicaDtoBuilder;
 
-        public PessoaFisicaServiceTests()
+        public PessoaFisicaCommandTests()
         {
             var dataNascimento = new DateTime(1970, 5, 20);
             pessoaFisica = new PessoaFisica(nome, cpf, rg, nomeMae, nomePai, dataNascimento, null, Raca.Pardo, naturalidade, nacionalidade, Sexo.Masculino);
