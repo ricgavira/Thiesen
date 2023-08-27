@@ -15,16 +15,14 @@ namespace Thiesen.Infra.Data.Mapping
 
             builder.Property(x => x.Nome)
                 .IsRequired();
-            builder.Property(x => x.Nome)
-                .IsRequired();
-            builder.Property(x => x.CPF)
+            builder.Property(x => x.Cpf)
                 .IsRequired();
             builder.Property(x => x.NomeDaMae)
                 .IsRequired();
             builder.Property(x => x.DataNascimento)
                 .IsRequired();
 
-            builder.Property(x => x.RG);
+            builder.Property(x => x.Rg);
             builder.Property(x => x.NomeDoPai);
             builder.Property(x => x.Foto);
             builder.Property(x => x.Raca);
@@ -33,12 +31,12 @@ namespace Thiesen.Infra.Data.Mapping
             builder.Property(x => x.Sexo);
 
             builder.HasMany(x => x.Contatos)
-                .WithOne()
+                .WithOne(c => c.PessoaFisica)
                 .HasForeignKey(x => x.PessoaFisicaId);
                 
             builder.HasMany(x => x.Enderecos)
                 .WithOne(p => p.PessoaFisica)
-                .HasForeignKey(p => p.PessoaFisica);
+                .HasForeignKey(p => p.PessoaFisicaId);
 
             builder.ToTable(nameof(PessoaFisica));
         }

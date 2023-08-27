@@ -4,17 +4,16 @@ namespace Thiesen.Domain.Entities
 {
     public class Contato : BaseEntity<Contato>
     {
-        public Contato(string descricao, TipoContato tipoContato, string responsavel)
+        public Contato(string nome, TipoContato tipoContato, int pessoaFisicaId)
         {
-            Descricao = descricao;
+            Nome = nome;
             TipoContato = tipoContato;
-            Responsavel = responsavel;
+            PessoaFisicaId = pessoaFisicaId;
         }
 
-        public string Descricao { get; private set; }
-        public string Responsavel { get; private set; }
+        public string Nome { get; private set; }
         public TipoContato TipoContato { get; private set; }
-        public int? PessoaFisicaId { get; private set; }
-        public int? PessoaJuridicaId { get; private set; }
+        public int PessoaFisicaId { get; private set; }
+        public PessoaFisica? PessoaFisica { get; set; }
     }
 }

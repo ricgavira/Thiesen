@@ -1,15 +1,11 @@
-﻿using Thiesen.Domain.Enums;
+﻿using MediatR;
+using Thiesen.Application.Dtos;
+using Thiesen.Domain.Enums;
 
-namespace Thiesen.Application.Dtos
+namespace Thiesen.Application.Commands.CreatePessoaFisica
 {
-    public class PessoaFisicaDto
+    public class CreatePessoaFisicaCommand : IRequest<int>
     {
-        public PessoaFisicaDto()
-        {
-            ContatosDto = new List<ContatoDto>();
-            EnderecosDto = new List<EnderecoDto>();
-        }
-
         public int Id { get; set; }
         public string? Nome { get; set; }
         public string? CPF { get; set; }

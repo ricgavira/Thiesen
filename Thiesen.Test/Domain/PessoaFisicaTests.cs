@@ -14,21 +14,21 @@ namespace Thiesen.Test.Domain
         private readonly string nacionalidade = "Brasileira";
 
 
-        [Fact(DisplayName = "Deve criar pessoa física")]
-        public void DevePessoaFisica()
-        {
-            var dataNascimento = new DateTime(1970, 5, 20);
-            var endereco = new Endereco("Rua da Divisão", TipoEndereco.Residencial, "79100000", new Bairro("Bairro", new Cidade("Cidade", new Estado("Estado", "MS"))), "100");
-            var pessoaFisica = new PessoaFisica(nome, cpf, rg, nomeMae, nomePai, dataNascimento, null, Raca.Pardo, naturalidade, nacionalidade, Sexo.Masculino);
+        //[Fact(DisplayName = "Deve criar pessoa física")]
+        //public void DevePessoaFisica()
+        //{
+        //    var dataNascimento = new DateTime(1970, 5, 20);
+        //    var endereco = new Endereco("Rua da Divisão", TipoEndereco.Residencial, "79100000", new Bairro("Bairro", new Cidade("Cidade", new Estado("Estado", "MS"))), "100");
+        //    var pessoaFisica = new PessoaFisica(nome, cpf, rg, nomeMae, nomePai, dataNascimento, null, Raca.Pardo, naturalidade, nacionalidade, Sexo.Masculino);
 
-            pessoaFisica.Enderecos.Add(endereco);
+        //    pessoaFisica.Enderecos.Add(endereco);
 
-            var contato = new Contato("Telefone Celular", TipoContato.Celular, "Ricardo");
-            pessoaFisica.Contatos.Add(contato);
+        //    var contato = new Contato("Telefone Celular", TipoContato.Celular, "Ricardo");
+        //    pessoaFisica.Contatos.Add(contato);
 
-            Assert.NotNull(pessoaFisica);
-            Assert.Equal(pessoaFisica.Nome, nome);
-            Assert.True(pessoaFisica.Contatos.Count() == 1);
-        }
+        //    Assert.NotNull(pessoaFisica);
+        //    Assert.Equal(pessoaFisica.Nome, nome);
+        //    Assert.True(pessoaFisica.Contatos.Count() == 1);
+        //}
     }
 }

@@ -10,5 +10,6 @@
 
         public string Nome { get; private set; }
         public string Sigla { get; private set; }
+        public List<Cidade>? Cidades { get; set; }
     }
 }

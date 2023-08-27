@@ -16,14 +16,14 @@ namespace Thiesen.Infra.Data.Repositories
 
         public async Task<PessoaFisica> AddAsync(PessoaFisica pessoaFisica)
         {
-            _appDbContext.Add<PessoaFisica>(pessoaFisica);
+            _appDbContext.Add(pessoaFisica);
             await _appDbContext.SaveChangesAsync();
             return pessoaFisica;
         }
 
         public async Task DeleteAsync(PessoaFisica pessoaFisica)
         {
-            _appDbContext.Remove<PessoaFisica>(pessoaFisica);
+            _appDbContext.Remove(pessoaFisica);
             await _appDbContext.SaveChangesAsync();
         }
 
@@ -36,7 +36,7 @@ namespace Thiesen.Infra.Data.Repositories
         public async Task<IEnumerable<PessoaFisica>> GetByCPFAsync(string CPF)
         {
             return await _appDbContext.PessoasFisicas
-                                      .Where(x => x.CPF == CPF)
+                                      .Where(x => x.Cpf == CPF)
                                       .ToListAsync();
         }
 
@@ -54,7 +54,7 @@ namespace Thiesen.Infra.Data.Repositories
 
         public async Task UpdateAsync(PessoaFisica pessoaFisica)
         {
-            _appDbContext.Update<PessoaFisica>(pessoaFisica);
+            _appDbContext.Update(pessoaFisica);
             await _appDbContext.SaveChangesAsync();
         }
     }

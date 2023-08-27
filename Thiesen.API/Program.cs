@@ -1,7 +1,12 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Thiesen.API.Filters;
+using Thiesen.Application.Commands.CreatePessoaFisica;
 using Thiesen.Domain.Repositories;
 using Thiesen.Infra.Data.Context;
+using Thiesen.Infra.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +17,15 @@ builder.Services.AddDbContext<AppDbContext>(option =>
           .EnableSensitiveDataLogging());
 
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddControllers();
+
+builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter)));
+
+builder.Services.AddValidatorsFromAssemblyContaining<CreatePessoaFisicaCommand>()
+                .AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters();
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreatePessoaFisicaCommand).Assembly));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(x =>
 {
@@ -35,9 +48,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-
-builder.Services.AddScoped<IPessoaFisicaRepository, IPessoaFisicaRepository>();
-
+builder.Services.AddScoped<IPessoaFisicaRepository, PessoaFisicaRepository>();
 
 var app = builder.Build();
 

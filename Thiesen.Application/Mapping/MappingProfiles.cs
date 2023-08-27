@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Thiesen.Application.Commands.CreatePessoaFisica;
+using Thiesen.Application.Commands.UpdatePessoaFisica;
 using Thiesen.Application.Dtos;
 using Thiesen.Domain.Entities;
 
@@ -8,7 +10,8 @@ namespace Thiesen.Application.Mapping
     {
         public MappingProfiles()
         {
-            CreateMap<PessoaFisica, PessoaFisicaDto>();
+            CreateMap<PessoaFisica, CreatePessoaFisicaCommand>();
+            CreateMap<PessoaFisica, UpdatePessoaFisicaCommand>();
             CreateMap<Contato, ContatoDto>();
             CreateMap<Endereco, EnderecoDto>();
         }

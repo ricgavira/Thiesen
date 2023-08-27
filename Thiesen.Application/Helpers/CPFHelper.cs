@@ -12,6 +12,9 @@ namespace Thiesen.Application.Helpers
 
         public static bool IsValid(string cpf)
         {
+            if (string.IsNullOrWhiteSpace(cpf)) 
+                return false;
+
             cpf = StringHelper.OnlyNumber(cpf);
 
             if (cpf.Length != 11) return false;

@@ -4,12 +4,21 @@ namespace Thiesen.Domain.Entities
 {
     public class PessoaFisica : BaseEntity<PessoaFisica>
     {
-        public PessoaFisica() { }
-        public PessoaFisica(string nome, string cpf, string rg, string nomeDaMae, string nomeDoPai, DateTime dataNascimento, byte[]? foto, Raca raca, string naturalidade, string nacionalidade, Sexo sexo)
+        public PessoaFisica(string nome,
+                            string cpf,
+                            string rg,
+                            string nomeDaMae,
+                            string nomeDoPai,
+                            DateTime dataNascimento,
+                            byte[]? foto,
+                            Raca raca,
+                            string naturalidade,
+                            string nacionalidade,
+                            Sexo sexo)
         {
             Nome = nome;
-            CPF = cpf;
-            RG = rg;
+            Cpf = cpf;
+            Rg = rg;
             NomeDaMae = nomeDaMae;
             NomeDoPai = nomeDoPai;            
             DataNascimento = dataNascimento;
@@ -20,18 +29,18 @@ namespace Thiesen.Domain.Entities
             Sexo = sexo;
         }
 
-        public string Nome { get; set; }
-        public string CPF { get; set; }
-        public string RG { get; set; }
-        public string NomeDaMae { get; set; }
-        public string NomeDoPai { get; set; }
-        public Raca Raca { get; set; }
-        public Sexo Sexo { get; set; }
-        public string Naturalidade { get; set; }
-        public string Nacionalidade { get; set; }
-        public DateTime DataNascimento { get; set; }
+        public string Nome { get; private set; }
+        public string Cpf { get; private set; }
+        public string Rg { get; private set; }
+        public string NomeDaMae { get; private set; }
+        public string NomeDoPai { get; private set; }
+        public Raca Raca { get; private set; }
+        public Sexo Sexo { get; private set; }
+        public string Naturalidade { get; private set; }
+        public string Nacionalidade { get; private set; }
+        public DateTime DataNascimento { get; private set; }
         public int Idade => CalcularIdade(DataNascimento);
-        public byte[]? Foto { get; set; }
+        public byte[]? Foto { get; private set; }
         public List<Contato> Contatos { get; set; } = new List<Contato>();
         public List<Endereco> Enderecos { get; set; } = new List<Endereco>();
 

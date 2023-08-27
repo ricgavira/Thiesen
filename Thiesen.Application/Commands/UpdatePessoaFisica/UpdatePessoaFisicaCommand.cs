@@ -1,18 +1,13 @@
-﻿using Thiesen.Domain.Enums;
+﻿using MediatR;
+using Thiesen.Application.Dtos;
+using Thiesen.Domain.Enums;
 
-namespace Thiesen.Application.Dtos
+namespace Thiesen.Application.Commands.UpdatePessoaFisica
 {
-    public class PessoaFisicaDto
+    public class UpdatePessoaFisicaCommand : IRequest<Unit>
     {
-        public PessoaFisicaDto()
-        {
-            ContatosDto = new List<ContatoDto>();
-            EnderecosDto = new List<EnderecoDto>();
-        }
-
         public int Id { get; set; }
         public string? Nome { get; set; }
-        public string? CPF { get; set; }
         public string? RG { get; set; }
         public string? NomeDaMae { get; set; }
         public string? NomeDoPai { get; set; }
@@ -24,5 +19,6 @@ namespace Thiesen.Application.Dtos
         public byte[]? Foto { get; set; }
         public List<ContatoDto>? ContatosDto { get; set; }
         public List<EnderecoDto>? EnderecosDto { get; set; }
+
     }
 }
