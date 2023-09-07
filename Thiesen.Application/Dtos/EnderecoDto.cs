@@ -11,6 +11,6 @@ namespace Thiesen.Application.Dtos
         public string Numero { get; set; }
         public string CEP { get; set; }
         public TipoEndereco TipoEndereco { get; set; }
-        public PessoaFisicaDto PessoaFisicaDto { get; set; }
+        public virtual PessoaFisicaDto PessoaFisicaDto { get; set; }
     }
 }

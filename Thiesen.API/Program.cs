@@ -5,6 +5,8 @@ using Microsoft.OpenApi.Models;
 using Thiesen.API.Filters;
 using Thiesen.Application.Commands.CreatePessoaFisica;
 using Thiesen.Domain.Repositories;
+using Thiesen.Domain.Services;
+using Thiesen.Infra.Data.AuthService;
 using Thiesen.Infra.Data.Context;
 using Thiesen.Infra.Data.Repositories;
 
@@ -49,6 +51,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<IPessoaFisicaRepository, PessoaFisicaRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

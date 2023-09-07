@@ -23,7 +23,7 @@ namespace Thiesen.API.Controllers
         public async Task<IActionResult> CreateAsync([FromBody] CreatePessoaFisicaCommand command)
         {
             var id = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetAsync), new { id = id }, command);
+            return CreatedAtAction(nameof(GetAsync), new { id }, command);
         }
 
         [HttpDelete]
@@ -39,7 +39,7 @@ namespace Thiesen.API.Controllers
         {
             var query = new GetAllPessoasFisicasQuery();
             var pessoasFisicasDto = await _mediator.Send(query);
-            return Ok(pessoasFisicasDto.ToList());
+            return Ok(pessoasFisicasDto);
         }
 
         [HttpGet("{id}")]

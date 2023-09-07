@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Thiesen.Application.Resources;
 using Thiesen.Domain.Repositories;
 
 namespace Thiesen.Application.Commands.DeletePessoaFisica
@@ -17,7 +18,7 @@ namespace Thiesen.Application.Commands.DeletePessoaFisica
             var pessoaFisica = await _repository.GetByIdAsync(request.Id);
 
             if (pessoaFisica == null)
-                throw new KeyNotFoundException("Pessoa Física Inexistente!");
+                throw new KeyNotFoundException(ValidationMessages.NotFoundPessoaFisica);
 
             await _repository.DeleteAsync(pessoaFisica);
 

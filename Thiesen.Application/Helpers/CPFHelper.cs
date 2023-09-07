@@ -12,21 +12,25 @@ namespace Thiesen.Application.Helpers
 
         public static bool IsValid(string cpf)
         {
-            if (string.IsNullOrWhiteSpace(cpf)) 
+            if (string.IsNullOrWhiteSpace(cpf))
                 return false;
 
             cpf = StringHelper.OnlyNumber(cpf);
 
-            if (cpf.Length != 11) return false;
+            if (cpf.Length != 11)
+                return false;
 
-            if (cpf.Distinct().Count() == 1) return false;
-                        
-            int[] factors = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            if (cpf.Distinct().Count() == 1)
+                return false;
+
+            int[] factors1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] factors2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+
             int sum = 0;
 
             for (int i = 0; i < 9; i++)
             {
-                sum += int.Parse(cpf[i].ToString()) * factors[i];
+                sum += int.Parse(cpf[i].ToString()) * factors1[i];
             }
 
             int remainder = sum % 11;
@@ -36,10 +40,10 @@ namespace Thiesen.Application.Helpers
 
             for (int i = 0; i < 9; i++)
             {
-                sum += int.Parse(cpf[i].ToString()) * factors[i + 1];
+                sum += int.Parse(cpf[i].ToString()) * factors2[i];
             }
 
-            sum += firstDigit * factors[0];
+            sum += firstDigit * factors2[9];
 
             remainder = sum % 11;
 

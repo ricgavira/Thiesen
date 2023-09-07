@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using MediatR;
-using Thiesen.Application.Dtos;
+using Thiesen.Application.Resources;
 using Thiesen.Domain.Repositories;
 
 namespace Thiesen.Application.Commands.UpdatePessoaFisica
@@ -10,9 +10,9 @@ namespace Thiesen.Application.Commands.UpdatePessoaFisica
     {
         private readonly IPessoaFisicaRepository _repository;
         private readonly IMapper _mapper;
-        private readonly IValidator<PessoaFisicaDto> _validator;
+        private readonly IValidator<UpdatePessoaFisicaCommand> _validator;
 
-        public UpdatePessoaFisicaCommandHandler(IPessoaFisicaRepository repository, IMapper mapper, IValidator<PessoaFisicaDto> validator)
+        public UpdatePessoaFisicaCommandHandler(IPessoaFisicaRepository repository, IMapper mapper, IValidator<UpdatePessoaFisicaCommand> validator)
         {
             _repository = repository;
             _mapper = mapper;
@@ -21,15 +21,15 @@ namespace Thiesen.Application.Commands.UpdatePessoaFisica
 
         public async Task<Unit> Handle(UpdatePessoaFisicaCommand request, CancellationToken cancellationToken)
         {
-            //var validationResult = _validator.Validate(request);
+            var validationResult = _validator.Validate(request);
 
-            //if (!validationResult.IsValid)
-            //    throw new ValidationException(validationResult.Errors);
+            if (!validationResult.IsValid)
+                throw new ValidationException(validationResult.Errors);
 
             var pessoaFisica = await _repository.GetByIdAsync(request.Id);
 
             if (pessoaFisica == null)
-                throw new KeyNotFoundException("Pessoa Física Inexistente!");
+                throw new KeyNotFoundException(ValidationMessages.NotFoundPessoaFisica);
 
             _mapper.Map(request, pessoaFisica);
 

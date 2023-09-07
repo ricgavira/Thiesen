@@ -11,6 +11,6 @@
         public string Nome { get; private set; }
         public int EstadoId { get; private set; }
         public Estado? Estado { get; set; }
-        public List<Bairro>? Bairros { get; set; }
+        public virtual List<Bairro>? Bairros { get; set; }
     }
 }

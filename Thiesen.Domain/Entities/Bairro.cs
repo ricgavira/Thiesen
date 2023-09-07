@@ -11,6 +11,6 @@
         public string Nome { get; private set; }
         public int CidadeId { get; private set; }
         public Cidade? Cidade { get; set; }
-        public List<Endereco>? Enderecos { get; set; }
+        public virtual List<Endereco>? Enderecos { get; set; }
     }
 }

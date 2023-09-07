@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using MediatR;
-using Thiesen.Application.Dtos;
 using Thiesen.Domain.Entities;
 using Thiesen.Domain.Repositories;
 
@@ -11,9 +10,9 @@ namespace Thiesen.Application.Commands.CreatePessoaFisica
     {
         private readonly IPessoaFisicaRepository _repository;
         private readonly IMapper _mapper;
-        private readonly IValidator<PessoaFisicaDto> _validator;
+        private readonly IValidator<CreatePessoaFisicaCommand> _validator;
 
-        public CreatePessoaFisicaCommandHandler(IPessoaFisicaRepository repository, IMapper mapper, IValidator<PessoaFisicaDto> validator)
+        public CreatePessoaFisicaCommandHandler(IPessoaFisicaRepository repository, IMapper mapper, IValidator<CreatePessoaFisicaCommand> validator)
         {
             _repository = repository;
             _mapper = mapper;
@@ -22,10 +21,10 @@ namespace Thiesen.Application.Commands.CreatePessoaFisica
 
         public async Task<int> Handle(CreatePessoaFisicaCommand request, CancellationToken cancellationToken)
         {
-            //var validationResult = _validator.Validate(request);
+            var validationResult = _validator.Validate(request);
 
-            //if (!validationResult.IsValid)
-            //    throw new ValidationException(validationResult.Errors);
+            if (!validationResult.IsValid)
+                throw new ValidationException(validationResult.Errors);
 
             var pessoaFisica = _mapper.Map<PessoaFisica>(request);
 
