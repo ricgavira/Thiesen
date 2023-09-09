@@ -5,7 +5,6 @@ namespace Thiesen.Application.Commands.CreateUsuario
 {
     public class CreateUsuarioCommand : IRequest<int>
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }

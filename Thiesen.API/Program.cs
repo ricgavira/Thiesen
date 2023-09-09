@@ -1,7 +1,10 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using Thiesen.API.Filters;
 using Thiesen.Application.Commands.CreatePessoaFisica;
 using Thiesen.Domain.Repositories;
@@ -9,6 +12,8 @@ using Thiesen.Domain.Services;
 using Thiesen.Infra.Data.AuthService;
 using Thiesen.Infra.Data.Context;
 using Thiesen.Infra.Data.Repositories;
+using Thiesen.Infra.IoC.AutoMapper;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(connectionString)
           .EnableSensitiveDataLogging());
 
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddApplication();
 
 builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter)));
 
@@ -28,10 +33,51 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreatePessoaFisicaCommand>(
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreatePessoaFisicaCommand).Assembly));
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                    };
+                });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(x =>
 {
     x.SwaggerDoc("v1", new OpenApiInfo { Title = "Thiesen WebApi", Version = "v1" });
+
+    x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using Bearer scheme."
+    });
+
+    x.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
 });
 
 builder.WebHost.ConfigureKestrel(option =>
@@ -76,8 +122,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

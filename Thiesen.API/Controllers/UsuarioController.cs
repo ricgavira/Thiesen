@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Thiesen.Application.Commands.CreateUsuario;
 using Thiesen.Application.Commands.DeleteUsuario;
@@ -12,6 +13,7 @@ namespace Thiesen.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsuarioController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -22,13 +24,19 @@ namespace Thiesen.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> CreateAsync([FromBody] CreateUsuarioCommand command)
         { 
-            var id = _mediator.Send(command);
-            return CreatedAtAction(nameof(GetAsync), new { id }, command);
+            var id = await _mediator.Send(command);
+
+            if (id == -1)
+                return BadRequest(ValidationMessages.ExistUsuario);
+
+            return Ok(id);            
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             var deleteCommand = new DeleteUsuarioCommand(id);
@@ -64,6 +72,7 @@ namespace Thiesen.API.Controllers
         }
 
         [HttpPut("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
             var loginDto = await _mediator.Send(command);

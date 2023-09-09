@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Thiesen.Application.Commands.CreatePessoaFisica;
 using Thiesen.Application.Commands.DeletePessoaFisica;
@@ -10,6 +11,7 @@ namespace Thiesen.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PessoaFisicaController : ControllerBase
     {
         private readonly IMediator _mediator;

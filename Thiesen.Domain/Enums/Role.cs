@@ -7,6 +7,6 @@ namespace Thiesen.Domain.Enums
         [Description("Administrador")]
         Administrator,
         [Description("Usuario comum")]
-        Usuario
+        User
     }
 }

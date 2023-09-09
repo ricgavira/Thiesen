@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FluentValidation;
 using MediatR;
 using Thiesen.Application.Resources;
 using Thiesen.Domain.Repositories;
@@ -10,22 +9,15 @@ namespace Thiesen.Application.Commands.UpdatePessoaFisica
     {
         private readonly IPessoaFisicaRepository _repository;
         private readonly IMapper _mapper;
-        private readonly IValidator<UpdatePessoaFisicaCommand> _validator;
 
-        public UpdatePessoaFisicaCommandHandler(IPessoaFisicaRepository repository, IMapper mapper, IValidator<UpdatePessoaFisicaCommand> validator)
+        public UpdatePessoaFisicaCommandHandler(IPessoaFisicaRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-            _validator = validator;
         }
 
         public async Task<Unit> Handle(UpdatePessoaFisicaCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
-
-            if (!validationResult.IsValid)
-                throw new ValidationException(validationResult.Errors);
-
             var pessoaFisica = await _repository.GetByIdAsync(request.Id);
 
             if (pessoaFisica == null)

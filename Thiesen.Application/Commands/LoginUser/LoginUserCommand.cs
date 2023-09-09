@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Thiesen.Application.Dtos;
-using Thiesen.Domain.Enums;
 
 namespace Thiesen.Application.Commands.LoginUser
 {
@@ -8,6 +7,5 @@ namespace Thiesen.Application.Commands.LoginUser
     {
         public string Login { get; set; }
         public string Password { get; set; }
-        public Role Role { get; set; }
     }
 }

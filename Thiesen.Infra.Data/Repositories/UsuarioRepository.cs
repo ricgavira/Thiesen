@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Thiesen.Domain.Entities;
-using Thiesen.Domain.Enums;
 using Thiesen.Domain.Repositories;
 using Thiesen.Infra.Data.Context;
 
@@ -40,18 +39,26 @@ namespace Thiesen.Infra.Data.Repositories
 
         }
 
-        public async Task<Usuario?> GetUsuarioByLoginAndPasswordAsync(string login, Role role, string passwordHash)
+        public async Task<Usuario?> GetUsuarioByLoginAndPasswordAsync(string login, string passwordHash)
         {
             return await _appDbContext.Usuarios
                                       .SingleOrDefaultAsync(x => x.Login == login && 
-                                                                 x.Password == passwordHash &&
-                                                                 x.Role == role);
+                                                                 x.Password == passwordHash);
         }
 
         public async Task UpdateAsync(Usuario usuario)
         {
             _appDbContext.Update(usuario);
             await _appDbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> GetByLoginAsync(string login)
+        {
+            var result = await _appDbContext.Usuarios
+                                            .Where(x => x.Login == login)
+                                            .AnyAsync();
+
+            return result;
         }
     }
 }

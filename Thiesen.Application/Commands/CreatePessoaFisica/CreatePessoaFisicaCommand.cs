@@ -6,7 +6,6 @@ namespace Thiesen.Application.Commands.CreatePessoaFisica
 {
     public class CreatePessoaFisicaCommand : IRequest<int>
     {
-        public int Id { get; set; }
         public string? Nome { get; set; }
         public string? CPF { get; set; }
         public string? RG { get; set; }

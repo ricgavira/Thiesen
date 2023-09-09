@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FluentValidation;
 using MediatR;
 using Thiesen.Domain.Entities;
 using Thiesen.Domain.Repositories;
@@ -11,23 +10,21 @@ namespace Thiesen.Application.Commands.CreateUsuario
     {
         private readonly IUsuarioRepository _repository;
         private readonly IMapper _mapper;
-        private readonly IValidator<CreateUsuarioCommand> _validator;
         private readonly IAuthService _authService;
 
-        public CreateUsuarioCommandHandler(IUsuarioRepository repository, IMapper mapper, IValidator<CreateUsuarioCommand> validator, IAuthService authService)
+        public CreateUsuarioCommandHandler(IUsuarioRepository repository, IMapper mapper, IAuthService authService)
         {
             _repository = repository;
             _mapper = mapper;
-            _validator = validator;
             _authService = authService;
         }
 
         public async Task<int> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
+            bool usuarioExiste = await _repository.GetByLoginAsync(request.Login);
 
-            if (!validationResult.IsValid)
-                throw new ValidationException(validationResult.Errors);
+            if (usuarioExiste)
+                return -1;
 
             request.Password = _authService.ComputedSha256Hash(request.Password);
 

@@ -25,14 +25,14 @@ namespace Thiesen.Application.Commands.LoginUser
         {
             var passwordHash = _authService.ComputedSha256Hash(request.Password);
 
-            var usuario = await _repository.GetUsuarioByLoginAndPasswordAsync(request.Login, request.Role, passwordHash);
+            var usuario = await _repository.GetUsuarioByLoginAndPasswordAsync(request.Login, passwordHash);
 
             if (usuario == null)
                 return null;
 
-            var token = _authService.GenerateJwtToken(request.Login, request.Role.ToString());
+            var token = _authService.GenerateJwtToken(usuario.Login, usuario.Role.ToString());
 
-            return new UsuarioLoginDto(request.Login, token);
+            return new UsuarioLoginDto(usuario.Login, token);
         }
     }
 }

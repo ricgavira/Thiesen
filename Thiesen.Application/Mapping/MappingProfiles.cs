@@ -15,8 +15,9 @@ namespace Thiesen.Application.Mapping
             CreateMap<PessoaFisica, CreatePessoaFisicaCommand>();
             CreateMap<PessoaFisica, UpdatePessoaFisicaCommand>();
             CreateMap<PessoaFisica, PessoaFisicaDto>();
-            CreateMap<Usuario, CreateUsuarioCommand>();            
+            CreateMap<Usuario, CreateUsuarioCommand>();
             CreateMap<Usuario, UpdateUsuarioCommand>();
+            CreateMap<CreateUsuarioCommand, Usuario>();
             CreateMap<Usuario, UsuarioDto>();
             CreateMap<Contato, ContatoDto>();
             CreateMap<Endereco, EnderecoDto>();

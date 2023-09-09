@@ -16,5 +16,7 @@
         public const string InvalidDataNascimento = "Data de Nascimento inválida!";
         public const string InvalidLogin = "Login inválido!";
         public const string InvalidEmail = "Email inválido!";
+
+        public const string ExistUsuario = "Usuário já existe";
     }
 }
