@@ -16,15 +16,14 @@ namespace Thiesen.Infra.Data.Repositories
 
         public async Task<Usuario> AddAsync(Usuario usuario)
         {
-            _appDbContext.Add(usuario);
-            await _appDbContext.SaveChangesAsync();
+            await _appDbContext.Usuarios.AddAsync(usuario);
             return usuario;
         }
 
-        public async Task DeleteAsync(Usuario usuario)
+        public Task DeleteAsync(Usuario usuario)
         {
             _appDbContext.Remove(usuario);
-            await _appDbContext.SaveChangesAsync();
+            return Task.CompletedTask;
         }
 
         public async Task<ICollection<Usuario>> GetAllAsync()
@@ -46,10 +45,10 @@ namespace Thiesen.Infra.Data.Repositories
                                                                  x.Password == passwordHash);
         }
 
-        public async Task UpdateAsync(Usuario usuario)
+        public Task UpdateAsync(Usuario usuario)
         {
             _appDbContext.Update(usuario);
-            await _appDbContext.SaveChangesAsync();
+            return Task.CompletedTask;
         }
 
         public async Task<bool> GetByLoginAsync(string login)

@@ -13,6 +13,7 @@ namespace Thiesen.Application.Mapping
         public MappingProfiles()
         {
             CreateMap<PessoaFisica, CreatePessoaFisicaCommand>();
+            CreateMap<CreatePessoaFisicaCommand, PessoaFisica>();
             CreateMap<PessoaFisica, UpdatePessoaFisicaCommand>();
             CreateMap<PessoaFisica, PessoaFisicaDto>();
             CreateMap<Usuario, CreateUsuarioCommand>();

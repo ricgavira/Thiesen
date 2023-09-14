@@ -1,31 +1,26 @@
-﻿using AutoMapper;
-using MediatR;
-using System.ComponentModel.DataAnnotations;
+﻿using MediatR;
 using Thiesen.Application.Dtos;
-using Thiesen.Application.Resources;
-using Thiesen.Domain.Repositories;
 using Thiesen.Domain.Services;
+using Thiesen.Infra.Data.UnitOfWork;
 
 namespace Thiesen.Application.Commands.LoginUser
 {
-    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, UsuarioLoginDto>
+    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, UsuarioLoginDto?>
     {
         private readonly IAuthService _authService;
-        private readonly IUsuarioRepository _repository;
-        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public LoginUserCommandHandler(IAuthService authService, IUsuarioRepository repository, IMapper mapper)
+        public LoginUserCommandHandler(IAuthService authService, IUnitOfWork unitOfWork)
         {
             _authService = authService;
-            _repository = repository;
-            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<UsuarioLoginDto?> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
             var passwordHash = _authService.ComputedSha256Hash(request.Password);
 
-            var usuario = await _repository.GetUsuarioByLoginAndPasswordAsync(request.Login, passwordHash);
+            var usuario = await _unitOfWork.UsuarioRepository.GetUsuarioByLoginAndPasswordAsync(request.Login, passwordHash);
 
             if (usuario == null)
                 return null;

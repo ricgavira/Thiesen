@@ -3,25 +3,26 @@ using MediatR;
 using Thiesen.Domain.Entities;
 using Thiesen.Domain.Repositories;
 using Thiesen.Domain.Services;
+using Thiesen.Infra.Data.UnitOfWork;
 
 namespace Thiesen.Application.Commands.CreateUsuario
 {
     public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand, int>
     {
-        private readonly IUsuarioRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IAuthService _authService;
 
-        public CreateUsuarioCommandHandler(IUsuarioRepository repository, IMapper mapper, IAuthService authService)
+        public CreateUsuarioCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IAuthService authService)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _authService = authService;
         }
 
         public async Task<int> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
         {
-            bool usuarioExiste = await _repository.GetByLoginAsync(request.Login);
+            bool usuarioExiste = await _unitOfWork.UsuarioRepository.GetByLoginAsync(request.Login);
 
             if (usuarioExiste)
                 return -1;
@@ -30,7 +31,8 @@ namespace Thiesen.Application.Commands.CreateUsuario
 
             var usuario = _mapper.Map<Usuario>(request);
 
-            var retorno = await _repository.AddAsync(usuario);
+            var retorno = await _unitOfWork.UsuarioRepository.AddAsync(usuario);
+            await _unitOfWork.SaveChangesAsync();
 
             return retorno.Id;
         }

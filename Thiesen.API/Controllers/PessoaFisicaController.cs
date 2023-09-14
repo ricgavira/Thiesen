@@ -6,6 +6,7 @@ using Thiesen.Application.Commands.DeletePessoaFisica;
 using Thiesen.Application.Commands.UpdatePessoaFisica;
 using Thiesen.Application.Queries.GetAllPessoasFisicas;
 using Thiesen.Application.Queries.GetPessoaFisicaById;
+using Thiesen.Application.Resources;
 
 namespace Thiesen.API.Controllers
 {
@@ -24,8 +25,15 @@ namespace Thiesen.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] CreatePessoaFisicaCommand command)
         {
+            if (command == null)
+                throw new ArgumentNullException($"{ValidationMessages.InvalidParameter} - {nameof(command)}");
+
             var id = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetAsync), new { id }, command);
+
+            if (id == -1)
+                return BadRequest(ValidationMessages.ExistPessoaFisica);
+
+            return Ok(id);            
         }
 
         [HttpDelete]

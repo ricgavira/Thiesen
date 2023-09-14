@@ -7,13 +7,9 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Thiesen.API.Filters;
 using Thiesen.Application.Commands.CreatePessoaFisica;
-using Thiesen.Domain.Repositories;
-using Thiesen.Domain.Services;
-using Thiesen.Infra.Data.AuthService;
 using Thiesen.Infra.Data.Context;
-using Thiesen.Infra.Data.Repositories;
 using Thiesen.Infra.IoC.AutoMapper;
-
+using Thiesen.Infra.IoC.Providers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,15 +19,11 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(connectionString)
           .EnableSensitiveDataLogging());
 
-builder.Services.AddApplication();
-
 builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter)));
 
 builder.Services.AddValidatorsFromAssemblyContaining<CreatePessoaFisicaCommand>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
-
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreatePessoaFisicaCommand).Assembly));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -96,9 +88,9 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddScoped<IPessoaFisicaRepository, PessoaFisicaRepository>();
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddMapping()
+                .AddCadastro()
+                .AddConfig();
 
 var app = builder.Build();
 

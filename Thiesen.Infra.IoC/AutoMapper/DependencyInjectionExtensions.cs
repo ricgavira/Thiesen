@@ -5,7 +5,7 @@ namespace Thiesen.Infra.IoC.AutoMapper
 {
     public static class DependencyInjectionExtensions
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
+        public static IServiceCollection AddMapping(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MappingProfiles));
 

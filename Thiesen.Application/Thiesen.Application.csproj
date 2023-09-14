@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Thiesen.Domain\Thiesen.Domain.csproj" />
+    <ProjectReference Include="..\Thiesen.Infra.Data\Thiesen.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

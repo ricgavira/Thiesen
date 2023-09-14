@@ -1,26 +1,27 @@
 ﻿using MediatR;
 using Thiesen.Application.Resources;
-using Thiesen.Domain.Repositories;
+using Thiesen.Infra.Data.UnitOfWork;
 
 namespace Thiesen.Application.Commands.DeleteUsuario
 {
     public class DeleteUsuarioCommandHandler : IRequestHandler<DeleteUsuarioCommand, Unit>
     {
-        private readonly IUsuarioRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteUsuarioCommandHandler(IUsuarioRepository repository)
+        public DeleteUsuarioCommandHandler(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(DeleteUsuarioCommand request, CancellationToken cancellationToken)
         {
-            var usuario = await _repository.GetByIdAsync(request.Id);
+            var usuario = await _unitOfWork.UsuarioRepository.GetByIdAsync(request.Id);
 
             if (usuario == null)
                 throw new KeyNotFoundException(ValidationMessages.NotFoundUsuario);
 
-            await _repository.DeleteAsync(usuario);
+            await _unitOfWork.UsuarioRepository.DeleteAsync(usuario);
+            await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;
         }
