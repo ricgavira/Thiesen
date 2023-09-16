@@ -1,11 +1,10 @@
-﻿using Thiesen.Domain.Repositories;
-
-namespace Thiesen.Infra.Data.UnitOfWork
+﻿namespace Thiesen.Infra.Data.UnitOfWork
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork<T>
     {
-        IPessoaFisicaRepository PessoaFisicaRepository { get; }
-        IUsuarioRepository UsuarioRepository { get; }
+        Task<T> AddAsync(T entity);
+        Task DeleteAsync(T entity);
+        Task UpdateAsync(T entity);
         Task BeginTransactionAsync();
         Task CommitTransactionAsync();
         Task<int> SaveChangesAsync();

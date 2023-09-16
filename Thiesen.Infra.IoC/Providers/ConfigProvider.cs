@@ -11,7 +11,7 @@ namespace Thiesen.Infra.IoC.Providers
         public static IServiceCollection AddConfig(this IServiceCollection services)
         {
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
             services.AddMediatR();
 

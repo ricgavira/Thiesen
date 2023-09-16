@@ -1,26 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using Thiesen.Domain.Repositories;
 using Thiesen.Infra.Data.Context;
 
 namespace Thiesen.Infra.Data.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork<T> : IUnitOfWork<T>
     {
         private readonly AppDbContext _appDbContext;
         private IDbContextTransaction? _transaction;
 
         public UnitOfWork(
-                AppDbContext appDbContext,
-                IPessoaFisicaRepository pessoaFisicaRepository,
-                IUsuarioRepository usuarioRepository)
+                AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-            PessoaFisicaRepository = pessoaFisicaRepository;
-            UsuarioRepository = usuarioRepository;
         }
-
-        public IPessoaFisicaRepository PessoaFisicaRepository { get; }
-        public IUsuarioRepository UsuarioRepository { get; }
 
         public async Task BeginTransactionAsync()
         {
@@ -50,6 +42,12 @@ namespace Thiesen.Infra.Data.UnitOfWork
             }
         }
 
+        public async Task<T> AddAsync(T entity)
+        {
+            await _appDbContext.AddAsync(entity);
+            return entity;
+        }
+
         public async Task<int> SaveChangesAsync()
         {
             return await _appDbContext.SaveChangesAsync();
@@ -67,6 +65,18 @@ namespace Thiesen.Infra.Data.UnitOfWork
             {
                 _appDbContext.Dispose();
             }
+        }
+
+        public Task DeleteAsync(T entity)
+        {
+            _appDbContext.Remove(entity);
+            return Task.CompletedTask;
+        }
+
+        public Task UpdateAsync(T entity)
+        {
+            _appDbContext.Update(entity);
+            return Task.CompletedTask;
         }
     }
 }

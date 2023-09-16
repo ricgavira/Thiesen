@@ -12,7 +12,7 @@ namespace Thiesen.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PessoaFisicaController : ControllerBase
     {
         private readonly IMediator _mediator;
